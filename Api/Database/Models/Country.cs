@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Database.ViewModels
 {
-    public class Country
+    public class Country : BaseModel
     {
         public int Id { get; set; }
         public string CountryName { get; set; }

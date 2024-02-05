@@ -1,4 +1,7 @@
 ﻿using Database.Contracts;
+using Database.EntityModels;
+
+using Database.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -15,7 +18,7 @@ namespace Database.CreationDbContext
             _orgDbConnectionString = orgDbConnectionString;
         }
 
-        private string _orgDbConnectionString;
+        public string _orgDbConnectionString;
         public async Task CreateTablesAsync()
         {
             string createTableQuery =
@@ -25,10 +28,7 @@ namespace Database.CreationDbContext
                     Name NVARCHAR(255) UNIQUE
                 );
 
-                CREATE TABLE Industries (
-                    IndustryId INT PRIMARY KEY IDENTITY(1,1),
-                    Name NVARCHAR(255) UNIQUE
-                );
+                
 
                 CREATE TABLE Organizations (
                     OrganizationId VARCHAR(255) PRIMARY KEY,
@@ -36,9 +36,10 @@ namespace Database.CreationDbContext
                     Website NVARCHAR(255),
                     Description TEXT,
                     Founded INT,
+                    Industry Text,
                     NumberOfEmployees INT,
                     CountryId INT FOREIGN KEY REFERENCES Countries(CountryId),
-                    IndustryId INT FOREIGN KEY REFERENCES Industries(IndustryId)
+                    
                 );
             ";
 
@@ -51,5 +52,7 @@ namespace Database.CreationDbContext
                 }
             }
         }
+
+        
     }
 }

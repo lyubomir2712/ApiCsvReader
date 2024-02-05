@@ -1,6 +1,6 @@
 using Database.Contracts;
 using Database.CreationDbContext;
-
+using Database.Insert;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +16,11 @@ builder.Services.AddSingleton<ICreateDatabase>(x =>
                 builder.Configuration.GetConnectionString("SetupConnection"),
                 builder.Configuration.GetConnectionString("OrganizationsDatabase")
             ));
+
+
 builder.Services.AddSingleton<ICreateTables>(x => new CreateTables(builder.Configuration.GetConnectionString("OrganizationsDatabase")));
+builder.Services.AddSingleton<InsertData>(x => new InsertData(builder.Configuration.GetConnectionString("OrganizationsDatabase")));
+
 
 
 var app = builder.Build();
